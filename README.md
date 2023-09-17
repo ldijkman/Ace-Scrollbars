@@ -1,4 +1,7 @@
-# Ace Editor Scrollbars
+# Ace Editor Custom Scrollbar 
+
+map search / higlight selected on vertical scrollbar
+
 CSS Scrollbars for [Ace Editor](https://github.com/ajaxorg/ace)
 
 Ace demo https://ace.c9.io/build/kitchen-sink.html
