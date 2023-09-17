@@ -15,9 +15,9 @@ from pixel position to percent positions
 
 works a bit better on different font sizes
 
-demo https://ldijkman.github.io/randomnerd_esp32_wifi_manager/mrs/create_from_scratch/Insane%20in%20the%20Membrane/ACE_Editor_JumpMarks_ScrollMarks.html
+Custom ScrollBars Demo https://ldijkman.github.io/randomnerd_esp32_wifi_manager/mrs/create_from_scratch/Insane%20in%20the%20Membrane/ACE_Editor_JumpMarks_ScrollMarks.html
 
-demo https://plnkr.co/edit/EYJWlWGjCdjNoui8?preview
+Custom ScrollBars https://plnkr.co/edit/EYJWlWGjCdjNoui8?preview
 
 ---
 
