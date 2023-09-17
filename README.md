@@ -4,6 +4,9 @@ CSS Scrollbars for [Ace Editor](https://github.com/ajaxorg/ace)
 Ace demo https://ace.c9.io/build/kitchen-sink.html
 
 ---
+ace kitchen-sink ddemo custom scrollbars did not work nice i think
+
+so searched and found this one that worked better i think
 
 changes to original ext-scrollbar.js https://github.com/ldijkman/Ace-Scrollbars/blob/master/src/ext-scrollbar.js
 
