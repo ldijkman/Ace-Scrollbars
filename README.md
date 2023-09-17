@@ -39,4 +39,8 @@ Just link to two files then initialise the scrollbars after initialising Ace.
     </script>
 ### Added search/occurance map
 
+![2023-09-17-083638_1920x1080_scrot](https://github.com/ldijkman/Ace-Scrollbars/assets/45427770/efe9dcb7-a4ea-4004-b846-27209076058d)
+
+---
+
 <img src="./screenshot.png">
