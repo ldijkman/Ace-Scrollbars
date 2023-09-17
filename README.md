@@ -1,6 +1,8 @@
 # Ace Editor Scrollbars
 CSS Scrollbars for [Ace Editor](https://github.com/ajaxorg/ace)
 
+Ace demo https://ace.c9.io/build/kitchen-sink.html
+
 ---
 
 changes to original ext-scrollbar.js https://github.com/ldijkman/Ace-Scrollbars/blob/master/src/ext-scrollbar.js
