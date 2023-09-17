@@ -1,6 +1,24 @@
 # Ace Editor Scrollbars
 CSS Scrollbars for [Ace Editor](https://github.com/ajaxorg/ace)
 
+---
+
+changes to original ext-scrollbar.js https://github.com/ldijkman/Ace-Scrollbars/blob/master/src/ext-scrollbar.js
+
+treid to change
+
+offset if editor does not start at windowpos zero
+
+from pixel position to percent positions
+
+works a bit better on different font sizes
+
+demo https://ldijkman.github.io/randomnerd_esp32_wifi_manager/mrs/create_from_scratch/Insane%20in%20the%20Membrane/ACE_Editor_JumpMarks_ScrollMarks.html
+
+demo https://plnkr.co/edit/EYJWlWGjCdjNoui8?preview
+
+---
+
 Simple to use CSS styled scrollbars:
 
 Just link to two files then initialise the scrollbars after initialising Ace.
