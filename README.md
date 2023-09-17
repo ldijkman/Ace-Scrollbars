@@ -1,6 +1,6 @@
 # Ace Editor Custom Scrollbar 
 
-map search / higlight selected on vertical scrollbar
+map search / highlight select on vertical scrollbar
 
 CSS Scrollbars for [Ace Editor](https://github.com/ajaxorg/ace)
 
