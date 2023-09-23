@@ -2,9 +2,9 @@
 
 # Demo
 
-https://ldijkman.github.io/Ace-Scrollbars/Ace_editor_custom_scrollbar.html
+demo https://ldijkman.github.io/Ace-Scrollbars/Ace_editor_custom_scrollbar.html
 
-https://github.com/ldijkman/Ace-Scrollbars/tree/master/docs
+source https://github.com/ldijkman/Ace-Scrollbars/tree/master/docs
 
 
 ---
