@@ -1,15 +1,16 @@
 
-<!-- 
+<!--
 https://github.com/ukandrewc/Ace-Scrollbars/tree/master
 
-https://github.com/ldijkman/Ace-Scrollbars/blob/master/src/Ace_editor_custom_scrollbar.html
+https://github.com/ldijkman/Ace-Scrollbars/tree/master/docs
+
 --> 
 
 <!DOCTYPE html> 
 <html lang="en"> 
 
 <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/ldijkman/randomnerd_esp32_wifi_manager/main/Electra.jpg">
-	
+
 <title>Ace Editor custom scrollbar highlight select code position on vertical scrollbar</title>
 
 <head>
@@ -73,7 +74,7 @@ https://github.com/ukandrewc/Ace-Scrollbars/tree/master
 }
 
 .ace_thumb-v {
-	background: darkgray;
+	background: lightgray;
 }
 /*
 .ace_scroll-h {
@@ -110,6 +111,14 @@ https://github.com/ukandrewc/Ace-Scrollbars/tree/master
 	height: 2px;
 	background: cornflowerblue
 }
+
+.ace_link_marker {
+      position: absolute;
+      border-bottom: 5px solid red;
+      //background:aqua;
+      opacity:50%;
+      
+}
 </style>  
 </head>
 
@@ -119,7 +128,8 @@ https://github.com/ukandrewc/Ace-Scrollbars/tree/master
 
 	<!--////////////////////////////////////////////////////////////-->
   <div id="editor"><textarea>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-https://github.com/ldijkman/Ace-Scrollbars/blob/master/src/Ace_editor_custom_scrollbar.html
+https://github.com/ldijkman/Ace-Scrollbars/blob/master/docs/Ace_editor_custom_scrollbar.html
+
 custom scrollbar show search / select highlight position in vertical scrollbar
 
     click on the editor text, so that the focus is on the editor
@@ -146,8 +156,10 @@ you get a menu where you can change the font size etcetera
 
     https://plnkr.co/edit/Digj5Fw7D6hxaTU4
 
+    https://github.com/ldijkman/Ace-Scrollbars/tree/master/docs
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-https://github.com/ldijkman/Ace-Scrollbars/blob/master/src/Ace_editor_custom_scrollbar.html
+
 
 
 <!--
@@ -2289,6 +2301,8 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ext-emmet.min.js" integrity="sha512-xbrBbnLPHPCwK4PZpXL4GN9UHCHAvJGroy3WyfltNhPKqyqw/EFgBrLhMkTIsGuqfBsIQY/VdnxfNe/SFQzJyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
+<script src="https://ldijkman.github.io/Ace-Editor-Click-Link-window.open-URL/hoverlink.js"></script>  
+<!--  https://github.com/ldijkman/Ace-Editor-Click-Link-window.open-URL/tree/main/docs -->
 
 
 
@@ -2316,6 +2330,31 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
       fontSize:20,
 			tabSize: 2
 		})
+
+
+    HoverLink = require("hoverlink").HoverLink
+    editor.hoverLink = new HoverLink(editor);
+
+
+  
+editor.hoverLink.on("open", function() {
+  // alert("trying to open")
+  console.log("trying to open",editor.hoverLink.link.value);
+  
+  if(editor.hoverLink.isOpen){
+      window.open(editor.hoverLink.link.value);
+ }
+  console.log("this.link",editor.hoverLink.isOpen);
+})
+
+
+   editor.getSession().on('change', function () {
+      var theme = editor.renderer.getTheme().replace("ace/theme/",".ace-");
+     theme = theme.replace("_","-");
+   console.log("theme ",theme);
+  
+   });
+     
 
 		new AceScrollbars(editor);
 
@@ -2355,11 +2394,22 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
    <script>
     
   document.addEventListener("DOMContentLoaded", () => {
-     
+  
+   
      editor.execCommand("find");  
 
      editor.find("function")
-  });
+
+   
+
+   var theme = editor.renderer.getTheme().replace("ace/theme/",".ace-");
+     theme = theme.replace("_","-");
+   console.log("theme ",theme);
+   //console.log("color",document.querySelector("ace_editor ace_dark ace-dracula").style.backgroundColor);
+   //ace_editor ace_dark ace-dracula
+   //  const addCSStwo = css =>document.head.appendChild(document.createElement("style")).innerHTML=css; 
+  //  addCSStwo(".ace_scroll-v{ background-color:"+ +"; }"); 
+    });
   
 </script>
 
