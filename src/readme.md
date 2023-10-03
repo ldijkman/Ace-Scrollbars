@@ -2,9 +2,7 @@
 
 map search / highlight select on vertical scrollbar
 
-CSS Scrollbars for [Ace Editor](https://github.com/ajaxorg/ace)
-
-Ace demo https://ace.c9.io/build/kitchen-sink.html
+Demo HTML Preview: https://ldijkman.github.io/Ace_Seventh_Heaven/Hell.html
 
 ---
 ace kitchen-sink demo custom scrollbars did not work nice i think
