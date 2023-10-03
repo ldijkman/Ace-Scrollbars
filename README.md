@@ -5,7 +5,7 @@ Ace Editor Seventh Heaven
 
 Heaven 7
 
-Demo: https://ldijkman.github.io/Ace_Seventh_Heaven/Seventh_Heaven.html
+Demo HTML Preview: https://ldijkman.github.io/Ace_Seventh_Heaven/Hell.html
 
 Source: https://github.com/ldijkman/Ace_Seventh_Heaven/tree/main/docs
 
