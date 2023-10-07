@@ -23,23 +23,29 @@ https://m.facebook.com/luberth.dijkman
 
 */
 
-function id(id) {
-  return document.getElementById(id);
-}
 
-function classname(classname) {
-  return document.getElementsByClassName(classname);
-}
+
+function AceScrollbars(e) {
 
 ///////////////////////////////////////////////////////////////////////////
 // arduino alike map function == Re-maps a number from one range to another. 
 // https://www.arduino.cc/reference/en/language/functions/math/map/ 
 ///////////////////////////////////////////////////////////////////////////////
-function map_range(value, low1, high1, low2, high2) {
+ map_range = function(value, low1, high1, low2, high2) {
     return (low2 + (high2 - low2) * (value - low1) / (high1 - low1)).toFixed(3);   // to 3 decimals, Math.round did not scale right
 }
 
-function AceScrollbars(e) {
+
+id = function (id) {
+  return document.getElementById(id);
+}
+classname = function (classname) {
+  return document.getElementsByClassName(classname);
+}
+
+
+
+
 
 	// Add CSS scrollbars
 	e.container.insertAdjacentHTML("beforeend", "<div id='ace_pre-v' class='ace_scroll-v'></div><div id='ace_bar-v' class='ace_scroll-v ace_thumb-v'></div>")
@@ -83,11 +89,15 @@ function AceScrollbars(e) {
 
 	showMapItems = function () {
 		let ht = ""
+		// next e.getCopyText() could return a string of all selected words on a newline, 
+		// split into array and get [0]
 		let tx = e.getCopyText().split(/\r?\n/)[0];//e.getCopyText();// could return a string of all sellected words on a newline split into array
 		console.log("tx ",tx);
 		if (tx != "") {
 			let op = e.getLastSearchOptions()
-			op.needle = e.getCopyText().split(/\r?\n/)[0];// could return a string of all sellected words on a newline split into array
+			// next e.getCopyText() could return a string of all selected words on a newline, 
+			// split into array and get [0]
+			op.needle = e.getCopyText().split(/\r?\n/)[0];			
 			console.log("op.needle ",op.needle);
 			e.$search.setOptions(op)
 			let lr = -1	
@@ -95,20 +105,35 @@ function AceScrollbars(e) {
 			for (r of e.$search.findAll(e.session)) {
 				if (r.start.row != lr) {       
 				                                           // nr_lines_vissible 40 lines for editor view?
-					ht += "<div class='ace_map-item' style='top:" +  (map_range(r.start.row ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>"
+					ht += "<div class='ace_map-item' style='top:" +  (map_range(r.start.row ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%;'></div>"
 					// luberth thinks, i do not know maybe better in % no px
-					//console.log("rScale",rScale);
-					//console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
-					//console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
+					// console.log("rScale",rScale);
+					// console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
+					// console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
 					
 					lr = r.start.row
 				}
 			}
 		}
-		id("ace_map").innerHTML = ht
+		let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
+		var alarm="";
+    		//get warnings errors?
+		//console.log("editor.getSession().getAnnotations()",editor.getSession().getAnnotations());
+		//console.log("editor.getSession().getAnnotations().length",editor.getSession().getAnnotations().length);
+		for (let i = 0; i < e.getSession().getAnnotations().length; i=i+1) {
+		        if(editor.getSession().getAnnotations()[i].type=="info"){
+				alarm += "<div class='ace_map-item' style='top:" +  (map_range(e.getSession().getAnnotations()[i].row ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%;background-color:pink;'></div>"
+			}
+			else if(editor.getSession().getAnnotations()[i].type=="error"){
+				alarm += "<div class='ace_map-item' style='top:" +  (map_range(e.getSession().getAnnotations()[i].row ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%;background-color:red;'></div>"
+			}else{            
+				alarm += "<div class='ace_map-item' style='top:" +  (map_range(e.getSession().getAnnotations()[i].row ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%;background-color:yellow;'></div>"
+			}				
+		}
+		id("ace_map").innerHTML = ht+alarm;
 		id("ace_map-row").style.top = map_range(e.getCursorPosition().row,0,editor.session.getLength()+50, 0,100)+"%"
-		//console.log("rScale2",rScale);
-	}
+		// console.log("rScale2",rScale);
+	} // end showmapitems lines
 
 	// Vertical
 	let rScale = 1
@@ -117,14 +142,15 @@ function AceScrollbars(e) {
 	let vStart = -1
 
 	let vs = sc[0]
-	let tv = id("ace_bar-v")    // tv is the gray view on scrollbar, should match the editor view position
+	let tv = id("ace_bar-v")    // tv is the gray view / handle on scrollbar, should match the editor view position
 
 	vs.addEventListener("scroll", function (e) {//think it needes an offset here if editor does not start at top 0 of document
 	//	tv.style.top = (vs.scrollTop-document.getElementById("editor").offsetTop) * vScale + "px"
-		tv.style.top = (map_range(vs.scrollTop-id("editor").offsetTop,0,vs.scrollHeight+vs.clientHeight,0,100))+"%"
-		//tv.style.top = (vs.scrollTop-e.offsetTop) * vScale + "px"
+	tv.style.top = (map_range(vs.scrollTop-id("editor").offsetTop,0,vs.scrollHeight+vs.clientHeight,0,100))+"%"
+	// tv.style.top = (vs.scrollTop-e.offsetTop) * vScale + "px"
 
 	})
+
 
 	// Drag events
 	tv.addEventListener("pointerdown", function (e) {
@@ -151,8 +177,8 @@ function AceScrollbars(e) {
 
 	tv.previousElementSibling.addEventListener("mousedown", function (e) {
 		// my editor does not start at zero because of my non editor buttons menu so offset needed
-     		vs.scrollTop = (e.clientY-id("editor").offsetTop) / vScale
-	   	//vs.scrollTop = (e.clientY-e.offsetTop) / vScale
+    vs.scrollTop = (e.clientY-id("editor").offsetTop) / vScale
+	  // vs.scrollTop = (e.clientY-e.offsetTop) / vScale
 
 	})
 
@@ -174,7 +200,7 @@ function AceScrollbars(e) {
 		}
 
 		rScale = e.renderer.lineHeight * vScale
-		//console.log("e.renderer.lineHeight",e.renderer.lineHeight);
+		// console.log("e.renderer.lineHeight",e.renderer.lineHeight);
 		gWidth = e.renderer.gutterWidth
 		th.previousElementSibling.style.left = gWidth + "px"
 		showMapItems()
